@@ -134,7 +134,7 @@
 
       <section id="collections" class="section container">
         <div class="section-head">
-          <h2>Show all Collections</h2>
+          <h2>Collections by Category</h2>
           <p>Select a category and use the Saree ID in WhatsApp chat.</p>
         </div>
 
@@ -235,7 +235,12 @@
       const whatsappItems = document.querySelectorAll(".whatsapp-item");
 
       if (sliderTrack) {
-        sliderTrack.innerHTML += sliderTrack.innerHTML;
+        const slides = Array.from(sliderTrack.children);
+        slides.forEach((slide) => {
+          const clone = slide.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          sliderTrack.appendChild(clone);
+        });
       }
 
       const buildWhatsAppLink = (sareeId) => {
