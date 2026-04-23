@@ -142,6 +142,7 @@
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
       let index = 0;
+      let autoSlideId;
 
       const render = () => {
         slideImage.src = images[index];
@@ -158,9 +159,24 @@
         render();
       };
 
-      nextBtn.addEventListener("click", next);
-      prevBtn.addEventListener("click", prev);
-      setInterval(next, 3500);
+      const restartAutoSlide = () => {
+        if (autoSlideId) {
+          clearInterval(autoSlideId);
+        }
+        autoSlideId = setInterval(next, 3500);
+      };
+
+      nextBtn.addEventListener("click", () => {
+        next();
+        restartAutoSlide();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prev();
+        restartAutoSlide();
+      });
+
+      restartAutoSlide();
     </script>
   </body>
 </html>
