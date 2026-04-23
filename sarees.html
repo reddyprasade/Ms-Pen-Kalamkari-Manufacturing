@@ -4,79 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sarees Slides | MS Pen Kalamkari</title>
-    <style>
-      :root {
-        --bg: #f4f7ff;
-        --card: #ffffff;
-        --text: #1d2342;
-        --accent: #6242e9;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: Inter, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .wrap {
-        width: min(980px, 92vw);
-        margin: 2rem auto;
-      }
-      .top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-      .top a {
-        text-decoration: none;
-        color: #fff;
-        background: var(--accent);
-        padding: 0.6rem 1rem;
-        border-radius: 999px;
-        font-weight: 600;
-      }
-      .slider {
-        margin-top: 1rem;
-        background: var(--card);
-        border-radius: 16px;
-        border: 1px solid #dce3ff;
-        padding: 0.8rem;
-      }
-      .slide {
-        margin: 0;
-      }
-      .slide img {
-        width: 100%;
-        aspect-ratio: 16 / 10;
-        object-fit: cover;
-        border-radius: 12px;
-        display: block;
-      }
-      .controls {
-        display: flex;
-        justify-content: center;
-        gap: 0.8rem;
-        margin-top: 0.8rem;
-      }
-      button {
-        border: 0;
-        border-radius: 999px;
-        padding: 0.55rem 0.95rem;
-        background: #eef1ff;
-        cursor: pointer;
-        font-weight: 600;
-      }
-      .caption {
-        text-align: center;
-        margin: 0.7rem 0 0.2rem;
-        color: #4d5688;
-        font-weight: 600;
-      }
-    </style>
+    <link rel="stylesheet" href="gallery.css" />
   </head>
   <body>
     <main class="wrap">
@@ -96,6 +24,7 @@
       </section>
     </main>
 
+    <script src="gallery.js"></script>
     <script>
       const images = [
         "Images/sarees/slide.jpg",
@@ -136,48 +65,7 @@
         "Images/sarees/1000027174.jpg",
         "Images/sarees/1000027289.jpg",
       ];
-
-      const slideImage = document.getElementById("slideImage");
-      const caption = document.getElementById("caption");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      let index = 0;
-      let autoSlideId = null;
-
-      const render = () => {
-        slideImage.src = images[index];
-        caption.textContent = `${index + 1} / ${images.length}`;
-      };
-
-      const next = () => {
-        index = (index + 1) % images.length;
-        render();
-      };
-
-      const prev = () => {
-        index = (index - 1 + images.length) % images.length;
-        render();
-      };
-
-      const restartAutoSlide = () => {
-        if (autoSlideId) {
-          clearInterval(autoSlideId);
-        }
-        autoSlideId = setInterval(next, 3500);
-      };
-
-      nextBtn.addEventListener("click", () => {
-        next();
-        restartAutoSlide();
-      });
-
-      prevBtn.addEventListener("click", () => {
-        prev();
-        restartAutoSlide();
-      });
-
-      render();
-      restartAutoSlide();
+      initGallery(images, { altText: "Sarees collection image" });
     </script>
   </body>
 </html>
